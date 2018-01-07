@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/tb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mylovelightblue"
+        android:minHeight="?attr/actionBarSize">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Widget.AppCompat.Light.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_back_selector" />
+
+        <Button
+            android:id="@+id/jump"
+            style="@style/Widget.AppCompat.Light.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+
+            android:text="跳过" />
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <EditText android:id="@+id/et_graduate_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="毕业院校"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <EditText android:id="@+id/et_professal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="专业"/>
+</android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <EditText android:id="@+id/et_certificate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="专业"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/iv_certificate_front"
+        android:src="@mipmap/id_front"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:src="@mipmap/id_back"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:id="@+id/iv_certifiicate_back"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        />
+    <Button
+        android:id="@+id/bt_sure_upload"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="确定并上传"/>
+
+
+
+</LinearLayout>

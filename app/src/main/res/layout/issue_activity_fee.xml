@@ -1,0 +1,34 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@drawable/view_bg_clickable_selector"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/height_row"
+	android:orientation="horizontal">
+	<TextView
+
+		android:layout_marginLeft="@dimen/margin_space"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:gravity="center_vertical"
+		android:text="费用"/>
+	<EditText
+		android:id="@+id/et_activity_fee"
+		android:textSize="@dimen/font_size_normal"
+		android:background="@null"
+		android:layout_width="0dp"
+		android:layout_weight="1"
+		android:layout_height="match_parent"
+		android:gravity="right|center_vertical"
+		android:hint="请输入费用"
+		android:layout_marginRight="@dimen/activity_horizontal_margin"
+		android:inputType="numberDecimal"
+		/>
+	<TextView
+		android:layout_marginRight="@dimen/margin_space"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:gravity="center_vertical"
+		android:text="元"/>
+
+</LinearLayout>

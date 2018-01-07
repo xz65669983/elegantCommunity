@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_activity"
+        android:orientation="vertical">
+        <!--主题-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row"
+            android:background="@drawable/view_bg_clickable_selector">
+
+            <TextView
+                android:id="@+id/topic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_space"
+                android:gravity="center_vertical"
+                android:text="主题"
+                android:textSize="@dimen/font_size_normal" />
+
+            <EditText
+                android:id="@+id/et_activity_topic"
+                android:textSize="@dimen/font_size_normal"
+                android:background="@null"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@+id/topic"
+                android:layout_toRightOf="@+id/topic"
+                android:gravity="center_vertical"
+                android:hint="活动主题" />
+
+            <View
+                style="@style/vertical_separator_line"
+                android:layout_toLeftOf="@+id/iv_add_topic"
+                android:layout_toStartOf="@+id/iv_add_topic" />
+
+            <ImageView
+                android:id="@+id/iv_add_topic"
+                android:layout_alignParentRight="true"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/add_topic" />
+
+        </RelativeLayout>
+
+        <View style="@style/separator_line" />
+        <!--时间-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row"
+            android:background="@drawable/view_bg_clickable_selector">
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_space"
+                android:gravity="center_vertical"
+                android:text="时间"
+                android:textSize="@dimen/font_size_normal" />
+
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
+                android:layout_toEndOf="@+id/time"
+                android:layout_toRightOf="@+id/time"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="开始时间"
+                android:textSize="@dimen/font_size_normal" />
+
+            <TextView
+                android:id="@+id/time_to"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/start_time"
+                android:layout_toRightOf="@+id/start_time"
+                android:gravity="center_vertical"
+                android:text="至"
+                android:textSize="@dimen/font_size_normal" />
+
+            <TextView
+                android:id="@+id/end_time"
+                android:background="@null"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/time_to"
+                android:layout_toRightOf="@+id/time_to"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:hint="结束时间"
+                android:textSize="@dimen/font_size_normal" />
+
+
+        </RelativeLayout>
+
+
+        <View style="@style/separator_line" />
+        <!-- 地点-->
+        <include
+            android:id="@+id/issue_activity_place"
+            layout="@layout/issue_activity_place"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <View style="@style/separator_line" />
+        <!--详细地址-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row"
+            android:background="@drawable/view_bg_clickable_selector"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_mian_address"
+                android:layout_marginLeft="@dimen/margin_space"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/view_bg_clickable_selector"
+                android:textSize="@dimen/font_size_normal"
+                android:hint="@string/main_address" />
+        </LinearLayout>
+
+
+        <View style="@style/separator_line" />
+
+        <!-- 费用-->
+        <include
+            android:id="@+id/issue_activity_fee"
+            layout="@layout/issue_activity_fee"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row" />
+
+        <View style="@style/separator_line" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <EditText
+                android:id="@+id/et_activity_content"
+                android:background="@null"
+                android:layout_margin="@dimen/margin_space"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="详情描述" />
+        </ScrollView>
+
+        <View style="@style/separator_line" />
+
+        <LinearLayout
+            android:background="@drawable/view_bg_clickable_selector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row"
+            android:orientation="horizontal">
+
+            <TextView
+                android:background="@null"
+                android:layout_marginLeft="@dimen/margin_space"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="咨询电话" />
+
+            <EditText
+                android:id="@+id/et_mobile_phone"
+                android:textSize="@dimen/font_size_normal"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:hint="手机号/座机号（区号-座机号）"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <View style="@style/separator_line" />
+        <!-- 报名截止-->
+        <include
+            android:id="@+id/issue_activity_sign_up_end"
+            layout="@layout/issue_activity_sign_up_end"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_row"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <Button
+            android:id="@+id/btn_issue"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
+            android:background="#ff0080"
+            android:gravity="center"
+            android:text="@string/issue"
+            android:textColor="@color/white"
+
+            />
+
+    </LinearLayout>
+

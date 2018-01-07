@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/tb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mylovelightblue"
+        android:minHeight="?attr/actionBarSize">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Widget.AppCompat.Light.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/btn_back_selector" />
+
+        <Button
+            android:id="@+id/id_jump"
+            style="@style/Widget.AppCompat.Light.ActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+
+            android:text="跳过" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/et_input_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入身份证号"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:src="@mipmap/id_front"
+        android:id="@+id/iv_id_front"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:id="@+id/iv_id_back"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/id_back"
+        android:scaleType="fitXY"/>
+
+    <Button
+        android:id="@+id/bt_confirm_upload"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="确定并上传"/>
+
+
+</LinearLayout>

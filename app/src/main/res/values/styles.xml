@@ -1,0 +1,157 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Slidable" parent="AppTheme.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="NightTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_night</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_night</item>
+        <item name="colorAccent">@color/colorAccent_night</item>
+        <item name="textColorPrimary">@color/textColorPrimary_night</item>
+        <item name="viewBackground">@color/viewBackground_night</item>
+    </style>
+
+    <style name="DayTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="textColorPrimary">@color/textColorPrimary</item>
+        <item name="viewBackground">@color/viewBackground</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabMaxWidth">@dimen/design_tab_max_width</item>
+        <item name="tabIndicatorColor">#FFFFFF</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="WindowAnimationFadeInOut">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <item name="android:dropDownVerticalOffset">0dp</item>
+    </style>
+
+    <style name="button_style" parent="@style/sdw_white">
+        <item name="android:layout_height">@dimen/height_button</item>
+        <item name="android:textSize">@dimen/textSizeMedium</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:background">@drawable/btn_bg</item>
+    </style>
+
+    <style name="sdw_white">
+        <item name="android:shadowColor">#7fffffff</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">0.65</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
+    <!--COPY -->
+
+    <style name="textStyle"></style>
+
+    <style name="textStyle.Small">
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+    </style>
+
+    <style name="textStyle.Normal">
+        <item name="android:textSize">@dimen/textSizeNormal</item>
+    </style>
+
+    <style name="textStyle.Medium">
+        <item name="android:textSize">@dimen/textSizeMedium</item>
+    </style>
+
+    <style name="textStyle.Big">
+        <item name="android:textSize">@dimen/textSizeBig</item>
+    </style>
+
+    <style name="textStyle.Big.subTitle" parent="textStyle.Big">
+        <item name="android:textColor">@color/sub_title</item>
+    </style>
+
+    <style name="separator_line">
+        <item name="android:background">#ffe0e0e0</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1.0px</item>
+    </style>
+
+    <style name="vertical_separator_line">
+        <item name="android:background">#ffe0e0e0</item>
+        <item name="android:layout_width">1.0px</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    <!-- 小号 , 黑色 -->
+    <style name="textStyle.Small.black" parent="textStyle.Small">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- 普通号 , 黑色 -->
+    <style name="textStyle.Normal.black" parent="textStyle.Normal">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- 中号 , 黑色 -->
+    <style name="textStyle.Medium.black" parent="textStyle.Medium">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- 中号 , 黑色 -->
+    <style name="textStyle.Medium.User" parent="textStyle.Medium.black">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 普通号 , 副标题 -->
+    <style name="textStyle.Normal.subTitle" parent="textStyle.Normal">
+        <item name="android:textColor">@color/sub_title</item>
+
+    </style>
+
+    <!-- 小号 , 白色 -->
+    <style name="textStyle.Small.white" parent="textStyle.Small">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- 普通号 , 白色 -->
+    <style name="textStyle.Normal.white" parent="textStyle.Normal">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- 中号 , 白色 -->
+    <style name="textStyle.Medium.white" parent="textStyle.Medium">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>
