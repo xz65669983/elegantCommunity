@@ -58,11 +58,7 @@ public class IdentifyIDActivity extends TakePhotoActivity {
     private String imagepath1=null;
     private String imagepath2=null;
     private int selectPostion;
-    public static final int TAKE_PHOTO_FRONT = 1;
-    public static final int TAKE_PHOTO_BACK = 2;
 
-    public static final int CHOOSE_PHOTO_FRONT = 3;
-    public static final int CHOOSE_PHOTO_BACK  = 4;
     @OnClick(R.id.id_jump)
     public void jump(){
 
@@ -193,9 +189,9 @@ public class IdentifyIDActivity extends TakePhotoActivity {
         super.takeSuccess(result);
 
         TImage image = result.getImage();
-        TImage.FromType fromType = image.getFromType();
-        Log.i(TAG,fromType.name());
-        Log.i(TAG,"绝对路径"+image.getCompressPath());
+//        TImage.FromType fromType = image.getFromType();
+//        Log.i(TAG,fromType.name());
+        Log.i(TAG,"绝对路径"+image.getOriginalPath());
 
         Bitmap bitmap = BitmapFactory.decodeFile(image.getOriginalPath());
         if(selectPostion==1){
@@ -227,9 +223,11 @@ public class IdentifyIDActivity extends TakePhotoActivity {
                        //拍照
                        case 0:
                            TakePhoto takePhoto1 = getTakePhoto();
+                           Log.i(TAG,"getExternalStorageDirectory:"+Environment.getExternalStorageDirectory());
                            File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".jpg");
                            if (!file.getParentFile().exists())file.getParentFile().mkdirs();
                            Uri imageUri = Uri.fromFile(file);
+                           Log.i(TAG,"imageUri为："+imageUri);
                            takePhoto1.onPickFromCapture(imageUri);
                            break;
 
