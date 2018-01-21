@@ -57,7 +57,11 @@ public class IdentifyIDActivity extends TakePhotoActivity {
     private ProgressDialog progressDialog;
     private String imagepath1=null;
     private String imagepath2=null;
+
+    //选择位置
     private int selectPostion;
+    //选择方式 0为拍照 1为从相片中获取
+    private int selectType;
 
     @OnClick(R.id.id_jump)
     public void jump(){
@@ -188,21 +192,29 @@ public class IdentifyIDActivity extends TakePhotoActivity {
     public void takeSuccess(TResult result) {
         super.takeSuccess(result);
 
-        TImage image = result.getImage();
-//        TImage.FromType fromType = image.getFromType();
-//        Log.i(TAG,fromType.name());
-        Log.i(TAG,"绝对路径"+image.getOriginalPath());
+        //当为拍照时
+        if (selectType==0){
+            if(selectPostion==1){
 
-        Bitmap bitmap = BitmapFactory.decodeFile(image.getOriginalPath());
-        if(selectPostion==1){
-            imagepath1=image.getOriginalPath();
-            iv_id_front.setImageBitmap(bitmap);
-        }else {
-            imagepath2=image.getOriginalPath();
-            iv_id_back.setImageBitmap(bitmap);
+                Bitmap bitmap1 = BitmapFactory.decodeFile(imagepath1);
+                iv_id_front.setImageBitmap(bitmap1);
+            }else {
+                Bitmap bitmap2 = BitmapFactory.decodeFile(imagepath2);
+                iv_id_front.setImageBitmap(bitmap2);
+            }
         }
-
-
+        //当为从相片获取时
+        if (selectType==1){
+            TImage image = result.getImage();
+            Bitmap bitmap = BitmapFactory.decodeFile(image.getOriginalPath());
+            if(selectPostion==1){
+                imagepath1=image.getOriginalPath();
+                iv_id_front.setImageBitmap(bitmap);
+            }else {
+                imagepath2=image.getOriginalPath();
+                iv_id_back.setImageBitmap(bitmap);
+            }
+        }
     }
 
    class Mylistener implements View.OnClickListener{
@@ -222,17 +234,25 @@ public class IdentifyIDActivity extends TakePhotoActivity {
                    switch (i){
                        //拍照
                        case 0:
+                          selectType=0;
                            TakePhoto takePhoto1 = getTakePhoto();
                            Log.i(TAG,"getExternalStorageDirectory:"+Environment.getExternalStorageDirectory());
                            File file=new File(Environment.getExternalStorageDirectory(), "/temp/"+System.currentTimeMillis() + ".jpg");
                            if (!file.getParentFile().exists())file.getParentFile().mkdirs();
                            Uri imageUri = Uri.fromFile(file);
                            Log.i(TAG,"imageUri为："+imageUri);
+                           Log.i(TAG,"imageUri为："+imageUri.getPath());
+                           if(selectPostion==1){
+                               imagepath1=imageUri.getPath();
+                           }else{
+                               imagepath2=imageUri.getPath();
+                           }
                            takePhoto1.onPickFromCapture(imageUri);
                            break;
 
                        //从照片中获取
                        case 1:
+                           selectType=1;
                            TakePhoto takePhoto2 = getTakePhoto();
                            takePhoto2.onPickFromGallery();
                            break;
