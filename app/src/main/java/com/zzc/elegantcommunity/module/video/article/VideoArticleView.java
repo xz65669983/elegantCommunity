@@ -49,6 +49,7 @@ public class VideoArticleView extends BaseListFragment<INewsArticle.Presenter> i
             @Override
             public void onLoadMore() {
                 if (canLoadMore) {
+
                     canLoadMore = false;
                     presenter.doLoadMoreData();
                 }
