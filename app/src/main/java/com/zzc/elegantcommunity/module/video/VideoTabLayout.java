@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.zzc.elegantcommunity.InitApp;
 import com.zzc.elegantcommunity.R;
 import com.zzc.elegantcommunity.adapter.base.BasePagerAdapter;
+import com.zzc.elegantcommunity.module.activity.ActivityListFragment;
 import com.zzc.elegantcommunity.module.base.BaseListFragment;
-import com.zzc.elegantcommunity.module.video.article.VideoArticleView;
 import com.zzc.elegantcommunity.util.SettingUtil;
 
 import java.util.ArrayList;
@@ -68,7 +68,8 @@ public class VideoTabLayout extends Fragment {
 
     private void initData() {
 
-        Fragment fragment = VideoArticleView.newInstance(categoryId[0]);
+
+        Fragment fragment= ActivityListFragment.newInstance();
         fragmentList.add(fragment);
         Fragment issueAvtivityFragment = new IssueAvtivityFragment();
         fragmentList.add(issueAvtivityFragment);

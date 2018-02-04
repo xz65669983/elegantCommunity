@@ -134,4 +134,6 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
         RxBus.getInstance().unregister(BaseListFragment.TAG, observable);
         super.onDestroy();
     }
+
+
 }

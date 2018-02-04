@@ -3,6 +3,7 @@ package com.zzc.elegantcommunity.adapter;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 
+import com.zzc.elegantcommunity.bean.ActivityList.ActivityListBean;
 import com.zzc.elegantcommunity.bean.joke.JokeCommentBean;
 import com.zzc.elegantcommunity.bean.joke.JokeContentBean;
 import com.zzc.elegantcommunity.bean.media.MediaWendaBean;
@@ -32,6 +33,7 @@ public class DiffCallback extends DiffUtil.Callback {
     public static final int SEARCH = 10;
     public static final int MUlTI_MEDIA = 11;
     public static final int MEDIA_WENDA = 12;
+    public static final int ACTIVITY_LIST=13;
     private List oldList, newList;
     private int type;
 
@@ -91,6 +93,9 @@ public class DiffCallback extends DiffUtil.Callback {
                 case MEDIA_WENDA:
                     return ((MediaWendaBean.AnswerQuestionBean) oldList.get(oldItemPosition)).getQuestion().getTitle().equals(
                             ((MediaWendaBean.AnswerQuestionBean) newList.get(newItemPosition)).getQuestion().getTitle());
+                case ACTIVITY_LIST:
+                    return ((ActivityListBean)oldList.get(oldItemPosition)).getTitle().equals(
+                            ((ActivityListBean)oldList.get(oldItemPosition)).getTitle());
             }
         } catch (Exception e) {
 //            ErrorAction.print(e);
@@ -132,6 +137,9 @@ public class DiffCallback extends DiffUtil.Callback {
                 case MEDIA_WENDA:
                     return ((MediaWendaBean.AnswerQuestionBean) oldList.get(oldItemPosition)).getAnswer().getAnsid().equals(
                             ((MediaWendaBean.AnswerQuestionBean) newList.get(newItemPosition)).getAnswer().getAnsid());
+                case ACTIVITY_LIST:
+                    return ((ActivityListBean)oldList.get(oldItemPosition)).getExtra().equals(
+                            ((ActivityListBean)oldList.get(oldItemPosition)).getExtra());
             }
         } catch (Exception e) {
 //            ErrorAction.print(e);

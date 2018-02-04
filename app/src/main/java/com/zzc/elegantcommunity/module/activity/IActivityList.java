@@ -1,9 +1,8 @@
 package com.zzc.elegantcommunity.module.activity;
 
-import com.zzc.elegantcommunity.bean.news.MultiNewsArticleDataBean;
+import com.zzc.elegantcommunity.bean.ActivityList.ActivityListBean;
 import com.zzc.elegantcommunity.module.base.IBaseListView;
 import com.zzc.elegantcommunity.module.base.IBasePresenter;
-
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public interface IActivityList {
         /**
          * 设置适配器
          */
-        void doSetAdapter(List<MultiNewsArticleDataBean> dataBeen);
+        void doSetAdapter(List<ActivityListBean> dataBeen);
 
         /**
          * 加载完毕
