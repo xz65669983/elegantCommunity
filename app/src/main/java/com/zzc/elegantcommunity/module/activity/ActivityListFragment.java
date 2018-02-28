@@ -59,8 +59,6 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
             activityListBean.setTitle("张峥超大帅哥"+i);
             oldItems.add(activityListBean);
         }
-        ((ActivityListPresenter)this.presenter).setDataList((ArrayList)oldItems);
-
         oldItems.add(new LoadingBean());
         adapter.setItems(oldItems);
         canLoadMore=true;
@@ -78,12 +76,17 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
 
     @Override
     public void onSetAdapter(List<?> list) {
-        Items newItems = new Items(list);
+        Items newItems = new Items();
+        oldItems.remove(oldItems.size()-1);
+        newItems.addAll(oldItems);
+        newItems.addAll(list);
         newItems.add(new LoadingBean());
-        DiffCallback.notifyDataSetChanged(oldItems, newItems, DiffCallback.ACTIVITY_LIST, adapter);
+        oldItems.add(new LoadingBean());
+//        DiffCallback.notifyDataSetChanged(oldItems, newItems, DiffCallback.ACTIVITY_LIST, adapter);
         oldItems.clear();
         oldItems.addAll(newItems);
         canLoadMore = true;
+        adapter.notifyDataSetChanged();
 
     }
 

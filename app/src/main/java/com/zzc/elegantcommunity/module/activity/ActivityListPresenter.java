@@ -23,14 +23,6 @@ public class ActivityListPresenter implements IActivityList.Presenter {
     private IActivityList.View view;
     private String time;
 
-    public List<ActivityListBean> getDataList() {
-        return dataList;
-    }
-
-    public void setDataList(List<ActivityListBean> dataList) {
-        this.dataList = dataList;
-    }
-
     private List<ActivityListBean> dataList = new ArrayList<>();
     private int beanCount = 11;
 
@@ -62,20 +54,21 @@ public class ActivityListPresenter implements IActivityList.Presenter {
         if (dataList.size() > 150) {
             dataList.clear();
         }
+        dataList.clear();
 
         Observable.create(new ObservableOnSubscribe<List<ActivityListBean>>() {
 
             @Override
             public void subscribe(ObservableEmitter<List<ActivityListBean>> e) throws Exception {
-                List<ActivityListBean> ActivityListBeans = new ArrayList<>();
+
                 for (int i = beanCount; i < beanCount + 10; i++) {
                     ActivityListBean activityListBean = new ActivityListBean();
                     activityListBean.setTitle("张峥超大帅哥" + i);
                     activityListBean.setExtra("哈哈哈哈哈" + i);
-                    ActivityListBeans.add(activityListBean);
+                    dataList.add(activityListBean);
                 }
                 beanCount = beanCount + 10;
-                e.onNext(ActivityListBeans);
+                e.onNext(dataList);
 
             }
         }).subscribeOn(Schedulers.io())
@@ -86,8 +79,6 @@ public class ActivityListPresenter implements IActivityList.Presenter {
                         doSetAdapter(activityListBeans);
                     }
                 });
-
-
     }
 
     @Override
@@ -97,7 +88,6 @@ public class ActivityListPresenter implements IActivityList.Presenter {
 
     @Override
     public void doSetAdapter(List<ActivityListBean> dataBeen) {
-        dataList.addAll(dataBeen);
         view.onSetAdapter(dataList);
         view.onHideLoading();
 

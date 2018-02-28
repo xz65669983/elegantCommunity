@@ -75,6 +75,7 @@ public abstract class BaseListFragment<T extends IBasePresenter> extends LazyLoa
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
 
     @Override

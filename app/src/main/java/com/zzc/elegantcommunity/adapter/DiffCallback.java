@@ -94,7 +94,7 @@ public class DiffCallback extends DiffUtil.Callback {
                     return ((MediaWendaBean.AnswerQuestionBean) oldList.get(oldItemPosition)).getQuestion().getTitle().equals(
                             ((MediaWendaBean.AnswerQuestionBean) newList.get(newItemPosition)).getQuestion().getTitle());
                 case ACTIVITY_LIST:
-                    return ((ActivityListBean)oldList.get(oldItemPosition)).getTitle().equals(
+                    return ((ActivityListBean)oldList.get(oldItemPosition)).getTitle().contentEquals(
                             ((ActivityListBean)oldList.get(oldItemPosition)).getTitle());
             }
         } catch (Exception e) {
@@ -138,7 +138,7 @@ public class DiffCallback extends DiffUtil.Callback {
                     return ((MediaWendaBean.AnswerQuestionBean) oldList.get(oldItemPosition)).getAnswer().getAnsid().equals(
                             ((MediaWendaBean.AnswerQuestionBean) newList.get(newItemPosition)).getAnswer().getAnsid());
                 case ACTIVITY_LIST:
-                    return ((ActivityListBean)oldList.get(oldItemPosition)).getExtra().equals(
+                    return ((ActivityListBean)oldList.get(oldItemPosition)).getExtra().contentEquals(
                             ((ActivityListBean)oldList.get(oldItemPosition)).getExtra());
             }
         } catch (Exception e) {
