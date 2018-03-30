@@ -76,6 +76,7 @@ public class NewsArticlePresenter implements INewsArticle.Presenter {
 
 //        Observable.merge(ob1, ob2)
 
+
         getRandom()
                 .subscribeOn(Schedulers.io())
                 .switchMap(new Function<MultiNewsArticleBean, Observable<MultiNewsArticleDataBean>>() {

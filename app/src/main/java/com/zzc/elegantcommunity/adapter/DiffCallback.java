@@ -3,7 +3,6 @@ package com.zzc.elegantcommunity.adapter;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 
-import com.zzc.elegantcommunity.bean.ActivityList.ActivityListBean;
 import com.zzc.elegantcommunity.bean.joke.JokeCommentBean;
 import com.zzc.elegantcommunity.bean.joke.JokeContentBean;
 import com.zzc.elegantcommunity.bean.media.MediaWendaBean;
@@ -14,6 +13,7 @@ import com.zzc.elegantcommunity.bean.photo.PhotoArticleBean;
 import com.zzc.elegantcommunity.bean.search.SearchResultBean;
 import com.zzc.elegantcommunity.bean.wenda.WendaArticleDataBean;
 import com.zzc.elegantcommunity.bean.wenda.WendaContentBean;
+import com.zzc.elegantcommunity.model.issueactivity.BriefActivityModel;
 
 import java.util.List;
 
@@ -94,8 +94,8 @@ public class DiffCallback extends DiffUtil.Callback {
                     return ((MediaWendaBean.AnswerQuestionBean) oldList.get(oldItemPosition)).getQuestion().getTitle().equals(
                             ((MediaWendaBean.AnswerQuestionBean) newList.get(newItemPosition)).getQuestion().getTitle());
                 case ACTIVITY_LIST:
-                    return ((ActivityListBean)oldList.get(oldItemPosition)).getTitle().contentEquals(
-                            ((ActivityListBean)oldList.get(oldItemPosition)).getTitle());
+                    return ((BriefActivityModel)oldList.get(oldItemPosition)).getTitle().equals(
+                            ((BriefActivityModel)oldList.get(oldItemPosition)).getTitle());
             }
         } catch (Exception e) {
 //            ErrorAction.print(e);
@@ -138,8 +138,8 @@ public class DiffCallback extends DiffUtil.Callback {
                     return ((MediaWendaBean.AnswerQuestionBean) oldList.get(oldItemPosition)).getAnswer().getAnsid().equals(
                             ((MediaWendaBean.AnswerQuestionBean) newList.get(newItemPosition)).getAnswer().getAnsid());
                 case ACTIVITY_LIST:
-                    return ((ActivityListBean)oldList.get(oldItemPosition)).getExtra().contentEquals(
-                            ((ActivityListBean)oldList.get(oldItemPosition)).getExtra());
+                    return ((BriefActivityModel)oldList.get(oldItemPosition)).getContent().equals(
+                            ((BriefActivityModel)oldList.get(oldItemPosition)).getContent());
             }
         } catch (Exception e) {
 //            ErrorAction.print(e);

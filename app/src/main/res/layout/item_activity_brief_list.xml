@@ -91,21 +91,6 @@
                     android:src="@color/viewBackground"
                     tools:ignore="ContentDescription"/>
 
-                <TextView
-                    android:id="@+id/tv_video_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:background="@color/textColorPrimary"
-                    android:padding="2dp"
-                    android:textColor="@color/White"
-                    tools:text="10:34"/>
-
             </RelativeLayout>
 
         </LinearLayout>

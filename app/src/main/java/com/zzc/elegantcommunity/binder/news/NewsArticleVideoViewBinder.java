@@ -40,7 +40,7 @@ public class NewsArticleVideoViewBinder extends ItemViewBinder<MultiNewsArticleD
     @NonNull
     @Override
     protected NewsArticleVideoViewBinder.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View view = inflater.inflate(R.layout.item_news_article_video, parent, false);
+        View view = inflater.inflate(R.layout.item_activity_brief_list, parent, false);
         return new ViewHolder(view);
     }
 

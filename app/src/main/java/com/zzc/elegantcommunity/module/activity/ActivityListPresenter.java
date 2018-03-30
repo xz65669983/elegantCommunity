@@ -1,6 +1,6 @@
 package com.zzc.elegantcommunity.module.activity;
 
-import com.zzc.elegantcommunity.bean.ActivityList.ActivityListBean;
+import com.zzc.elegantcommunity.model.issueactivity.BriefActivityModel;
 import com.zzc.elegantcommunity.util.TimeUtil;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class ActivityListPresenter implements IActivityList.Presenter {
     private IActivityList.View view;
     private String time;
 
-    private List<ActivityListBean> dataList = new ArrayList<>();
+    private List<BriefActivityModel> dataList = new ArrayList<>();
     private int beanCount = 11;
 
     public ActivityListPresenter(IActivityList.View view) {
@@ -56,29 +56,29 @@ public class ActivityListPresenter implements IActivityList.Presenter {
         }
         dataList.clear();
 
-        Observable.create(new ObservableOnSubscribe<List<ActivityListBean>>() {
-
-            @Override
-            public void subscribe(ObservableEmitter<List<ActivityListBean>> e) throws Exception {
-
-                for (int i = beanCount; i < beanCount + 10; i++) {
-                    ActivityListBean activityListBean = new ActivityListBean();
-                    activityListBean.setTitle("张峥超大帅哥" + i);
-                    activityListBean.setExtra("哈哈哈哈哈" + i);
-                    dataList.add(activityListBean);
-                }
-                beanCount = beanCount + 10;
-                e.onNext(dataList);
-
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<ActivityListBean>>() {
-                    @Override
-                    public void accept(List<ActivityListBean> activityListBeans) throws Exception {
-                        doSetAdapter(activityListBeans);
-                    }
-                });
+//        Observable.create(new ObservableOnSubscribe<List<ActivityListBean>>() {
+//
+//            @Override
+//            public void subscribe(ObservableEmitter<List<ActivityListBean>> e) throws Exception {
+//
+//                for (int i = beanCount; i < beanCount + 10; i++) {
+//                    ActivityListBean activityListBean = new ActivityListBean();
+//                    activityListBean.setTitle("张峥超大帅哥" + i);
+//                    activityListBean.setExtra("哈哈哈哈哈" + i);
+//                    dataList.add(activityListBean);
+//                }
+//                beanCount = beanCount + 10;
+//                e.onNext(dataList);
+//
+//            }
+//        }).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<List<ActivityListBean>>() {
+//                    @Override
+//                    public void accept(List<ActivityListBean> activityListBeans) throws Exception {
+//                        doSetAdapter(activityListBeans);
+//                    }
+//                });
     }
 
     @Override
@@ -87,7 +87,7 @@ public class ActivityListPresenter implements IActivityList.Presenter {
     }
 
     @Override
-    public void doSetAdapter(List<ActivityListBean> dataBeen) {
+    public void doSetAdapter(List<BriefActivityModel> dataBeen) {
         view.onSetAdapter(dataList);
         view.onHideLoading();
 

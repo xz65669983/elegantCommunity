@@ -1,6 +1,6 @@
 package com.zzc.elegantcommunity.module.activity;
 
-import com.zzc.elegantcommunity.bean.ActivityList.ActivityListBean;
+import com.zzc.elegantcommunity.model.issueactivity.BriefActivityModel;
 import com.zzc.elegantcommunity.module.base.IBaseListView;
 import com.zzc.elegantcommunity.module.base.IBasePresenter;
 
@@ -39,7 +39,7 @@ public interface IActivityList {
         /**
          * 设置适配器
          */
-        void doSetAdapter(List<ActivityListBean> dataBeen);
+        void doSetAdapter(List<BriefActivityModel> dataBeen);
 
         /**
          * 加载完毕
