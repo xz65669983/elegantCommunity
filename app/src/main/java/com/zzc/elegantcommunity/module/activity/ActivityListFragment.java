@@ -164,6 +164,7 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
                     instance.saveLatestId(latestid);
                     instance.saveOldestId(oldestid);
                     oldItems.clear();
+
                 }
             }
         }).observeOn(AndroidSchedulers.mainThread())
