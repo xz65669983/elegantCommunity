@@ -10,7 +10,7 @@ public class BriefAcitivtyResponseModel {
 
     private String resultCode;
     private String resultMessage;
-    private List<BriefActivityModel> BriefActivityModelList;
+    private List<BriefActivityModel> activities;
 
     public String getResultCode() {
         return resultCode;
@@ -29,10 +29,10 @@ public class BriefAcitivtyResponseModel {
     }
 
     public List<BriefActivityModel> getBriefActivityModelList() {
-        return BriefActivityModelList;
+        return activities;
     }
 
     public void setBriefActivityModelList(List<BriefActivityModel> briefActivityModelList) {
-        BriefActivityModelList = briefActivityModelList;
+        activities = briefActivityModelList;
     }
 }

@@ -15,7 +15,6 @@ public class RxRetrofitWithGson {
     public static synchronized Retrofit getRxRetrofitInstance(){
         if(retrofit==null){
             retrofit = new Retrofit.Builder()
-                    // .baseUrl("http://kikipar.imwork.net:29296/")
                     .baseUrl(ConstantURL.URL)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

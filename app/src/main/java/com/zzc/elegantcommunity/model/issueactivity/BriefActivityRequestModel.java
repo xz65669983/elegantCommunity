@@ -6,32 +6,16 @@ package com.zzc.elegantcommunity.model.issueactivity;
 
 public class BriefActivityRequestModel {
 
-    private String userAcc;
-    private String token;
-    private Integer startNum;
+    private Long startNum;
     private Integer pageSize;
 
-    public String getUserAcc() {
-        return userAcc;
-    }
 
-    public void setUserAcc(String userAcc) {
-        this.userAcc = userAcc;
-    }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Integer getStartNum() {
+    public Long getStartNum() {
         return startNum;
     }
 
-    public void setStartNum(Integer startNum) {
+    public void setStartNum(Long startNum) {
         this.startNum = startNum;
     }
 

@@ -3,7 +3,6 @@ package com.zzc.elegantcommunity.module.video;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,7 +137,6 @@ public class IssueAvtivityFragment extends Fragment {
 
         issueActivityModel.setActivityDetialsModel(acm);
         String token= UserInfoUtil.getInstance().getToken();
-        Log.i("asda","Token为："+token);
         issueActivityModel.setToken(token);
 
         IssueActivityService issueActivityService = RxRetrofitWithGson.getRxRetrofitInstance().create(IssueActivityService.class);

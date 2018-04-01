@@ -36,7 +36,7 @@ public class ActivitListViewBinder extends ItemViewBinder<BriefActivityModel, Ac
 
         final Context context = holder.itemView.getContext();
         holder.tv_title.setText(item.getTitle());
-        holder.tv_extra.setText(item.getContent());
+        holder.tv_extra.setText(item.getContent()+"id:"+item.getId());
         ImageLoader.loadCenterCrop(context, item.getPoster(), holder.iv_video_image, R.color.viewBackground);
     }
 
