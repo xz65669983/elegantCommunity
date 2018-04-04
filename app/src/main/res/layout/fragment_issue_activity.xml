@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,8 +26,6 @@
 
             <EditText
                 android:id="@+id/et_activity_topic"
-                android:textSize="@dimen/font_size_normal"
-                android:background="@null"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
@@ -30,8 +33,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@+id/topic"
                 android:layout_toRightOf="@+id/topic"
+                android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="活动主题" />
+                android:hint="活动主题"
+                android:textSize="@dimen/font_size_normal" />
 
             <View
                 style="@style/vertical_separator_line"
@@ -40,12 +45,24 @@
 
             <ImageView
                 android:id="@+id/iv_add_topic"
-                android:layout_alignParentRight="true"
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:src="@drawable/add_topic" />
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_imageview_container"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/iv_addimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
         <View style="@style/separator_line" />
         <!--时间-->
@@ -80,10 +97,10 @@
 
             <TextView
                 android:id="@+id/time_to"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/start_time"
                 android:layout_toRightOf="@+id/start_time"
                 android:gravity="center_vertical"
@@ -92,14 +109,14 @@
 
             <TextView
                 android:id="@+id/end_time"
-                android:background="@null"
                 android:layout_width="140dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/time_to"
-                android:layout_toRightOf="@+id/time_to"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_toEndOf="@+id/time_to"
+                android:layout_toRightOf="@+id/time_to"
+                android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="结束时间"
                 android:textSize="@dimen/font_size_normal" />
@@ -129,12 +146,12 @@
 
             <EditText
                 android:id="@+id/et_mian_address"
-                android:layout_marginLeft="@dimen/margin_space"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_space"
                 android:background="@drawable/view_bg_clickable_selector"
-                android:textSize="@dimen/font_size_normal"
-                android:hint="@string/main_address" />
+                android:hint="@string/main_address"
+                android:textSize="@dimen/font_size_normal" />
         </LinearLayout>
 
 
@@ -155,39 +172,39 @@
 
             <EditText
                 android:id="@+id/et_activity_content"
-                android:background="@null"
-                android:layout_margin="@dimen/margin_space"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_space"
+                android:background="@null"
                 android:hint="详情描述" />
         </ScrollView>
 
         <View style="@style/separator_line" />
 
         <LinearLayout
-            android:background="@drawable/view_bg_clickable_selector"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_row"
+            android:background="@drawable/view_bg_clickable_selector"
             android:orientation="horizontal">
 
             <TextView
-                android:background="@null"
-                android:layout_marginLeft="@dimen/margin_space"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_space"
+                android:background="@null"
                 android:gravity="center_vertical"
                 android:text="咨询电话" />
 
             <EditText
                 android:id="@+id/et_mobile_phone"
-                android:textSize="@dimen/font_size_normal"
-                android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@null"
+                android:ems="10"
                 android:gravity="right|center_vertical"
                 android:hint="手机号/座机号（区号-座机号）"
-                android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textSize="@dimen/font_size_normal" />
 
         </LinearLayout>
 
@@ -216,4 +233,9 @@
             />
 
     </LinearLayout>
+
+
+</ScrollView>
+
+
 

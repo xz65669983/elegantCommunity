@@ -14,6 +14,7 @@ import com.zzc.elegantcommunity.R;
 import com.zzc.elegantcommunity.adapter.base.BasePagerAdapter;
 import com.zzc.elegantcommunity.module.activity.ActivityListFragment;
 import com.zzc.elegantcommunity.module.base.BaseListFragment;
+import com.zzc.elegantcommunity.module.issueActivity.IssueActivityFragment;
 import com.zzc.elegantcommunity.util.SettingUtil;
 
 import java.util.ArrayList;
@@ -71,7 +72,8 @@ public class VideoTabLayout extends Fragment {
 
         Fragment fragment= ActivityListFragment.newInstance();
         fragmentList.add(fragment);
-        Fragment issueAvtivityFragment = new IssueAvtivityFragment();
+//        Fragment issueAvtivityFragment = new IssueAvtivityFragment();
+        Fragment issueAvtivityFragment =new IssueActivityFragment();
         fragmentList.add(issueAvtivityFragment);
 
         adapter = new BasePagerAdapter(getChildFragmentManager(), fragmentList, categoryName);

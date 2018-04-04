@@ -1,8 +1,17 @@
 package com.zzc.elegantcommunity.module.video;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +32,7 @@ import com.zzc.elegantcommunity.model.MyResponseBody;
 import com.zzc.elegantcommunity.model.issueactivity.ActivityDetialsModel;
 import com.zzc.elegantcommunity.model.issueactivity.IssueActivityModel;
 import com.zzc.elegantcommunity.retrofit.IssueActivityService;
+import com.zzc.elegantcommunity.retrofit.RetrofitImageAPI;
 import com.zzc.elegantcommunity.retrofit.RxRetrofitWithGson;
 import com.zzc.elegantcommunity.util.UserInfoUtil;
 
@@ -37,6 +47,13 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Retrofit;
+
+import static android.app.Activity.RESULT_OK;
+import static com.zzc.elegantcommunity.module.video.content.VideoContentActivity.TAG;
 
 
 /**
@@ -45,6 +62,8 @@ import io.reactivex.schedulers.Schedulers;
 public class IssueAvtivityFragment extends Fragment {
 
     private String place;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @BindView(R.id.et_activity_topic)
     EditText etActivityTopic;
@@ -60,6 +79,58 @@ public class IssueAvtivityFragment extends Fragment {
     @BindView(R.id.et_mian_address)
     EditText etMianAddress;
 
+    @OnClick(R.id.iv_add_topic)
+    public void addTopic(){
+//        Retrofit retrofit = RxRetrofitWithGson.getRxRetrofitInstance();
+//        RetrofitImageAPI retrofitImageAPI = retrofit.create(RetrofitImageAPI.class);
+
+//        RequestBody requestFile =
+//                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData()
+//
+//        retrofitImageAPI.fileUpload();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
+            if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.CAMERA},222);
+                return;
+            }else{
+
+                openCamra();//调用具体方法
+            }
+        } else {
+
+            openCamra();//调用具体方法
+        }
+
+
+    }
+    public void openCamra(){
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG,"来了 来了 来了");
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//            mImageView.setImageBitmap(imageBitmap);
+
+            if(imageBitmap!=null){
+                Log.i(TAG,"成功了！！成功了！！！");
+            }
+        }
+    }
 
     @OnClick(R.id.start_time)
     public void startTime() {
@@ -249,4 +320,6 @@ public class IssueAvtivityFragment extends Fragment {
             }
         });
     }
+
+
 }
