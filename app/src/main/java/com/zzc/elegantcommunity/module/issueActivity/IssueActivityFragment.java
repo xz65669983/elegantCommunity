@@ -3,18 +3,13 @@ package com.zzc.elegantcommunity.module.issueActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.zzc.elegantcommunity.R;
-import com.zzc.elegantcommunity.binder.activitylist.ActivitListViewBinder;
 import com.zzc.elegantcommunity.binder.activitylist.IssueActivityViewBinder;
 import com.zzc.elegantcommunity.model.issueactivity.ActivityDetialsModel;
-import com.zzc.elegantcommunity.model.issueactivity.BriefActivityModel;
-import com.zzc.elegantcommunity.model.issueactivity.IssueActivityModel;
 import com.zzc.elegantcommunity.module.activity.IActivityList;
 import com.zzc.elegantcommunity.module.base.BaseListFragment;
 
 import java.util.List;
 
-import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 
 /**
@@ -44,8 +39,10 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
     @Override
     protected void initView(View view) {
         super.initView(view);
+        swipeRefreshLayout.setEnabled(false);
         adapter = new MultiTypeAdapter(oldItems);
         adapter.register(ActivityDetialsModel.class, new IssueActivityViewBinder());
+        recyclerView.setAdapter(adapter);
 
 
     }
