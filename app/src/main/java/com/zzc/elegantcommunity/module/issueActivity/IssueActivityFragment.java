@@ -1,22 +1,35 @@
 package com.zzc.elegantcommunity.module.issueActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
+import com.zzc.elegantcommunity.InitApp;
 import com.zzc.elegantcommunity.binder.activitylist.IssueActivityViewBinder;
 import com.zzc.elegantcommunity.model.issueactivity.ActivityDetialsModel;
 import com.zzc.elegantcommunity.module.activity.IActivityList;
 import com.zzc.elegantcommunity.module.base.BaseListFragment;
 
+import java.io.File;
 import java.util.List;
 
 import me.drakeet.multitype.MultiTypeAdapter;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * Created by zhangzhengchao on 2018/4/4.
  */
 
 public class IssueActivityFragment extends BaseListFragment<IActivityList.Presenter> {
+    public static final String TAG = "IssueActivityFragment";
+    private static final int IMAGE = 1;
+
     @Override
     public void setPresenter(IActivityList.Presenter presenter) {
 
@@ -29,11 +42,11 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
 
     @Override
     protected void initData() throws NullPointerException {
-        Log.i(TAG, "你为什么不出来~！！！！！！");
-
         oldItems.add(new ActivityDetialsModel());
         adapter.setItems(oldItems);
         adapter.notifyDataSetChanged();
+
+
     }
 
     @Override
@@ -41,10 +54,48 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
         super.initView(view);
         swipeRefreshLayout.setEnabled(false);
         adapter = new MultiTypeAdapter(oldItems);
-        adapter.register(ActivityDetialsModel.class, new IssueActivityViewBinder());
+        adapter.register(ActivityDetialsModel.class, new IssueActivityViewBinder(IssueActivityFragment.this));
         recyclerView.setAdapter(adapter);
+
 
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG,"老子我回来啦！！！！！");
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //获取图片路径
+        if (requestCode == IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            Log.i(TAG,"uri路径"+uri.getPath());
+            Log.i(TAG, "外部绝对路径："+Environment.getExternalStorageDirectory().getPath());
+            Luban.with(InitApp.AppContext)
+                    .load(uri.getPath())
+                    .ignoreBy(100)
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+
+                        }
+
+                        @Override
+                        public void onSuccess(File file) {
+                            Log.i(TAG,"FILE路径"+file.getAbsolutePath());
+                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                            IssueActivityViewBinder.ViewHolder childViewHolder = (IssueActivityViewBinder.ViewHolder)recyclerView.getChildViewHolder(IssueActivityViewBinder.view);
+                            childViewHolder.addImageView.setImageBitmap(bitmap);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                         Log.e(TAG,"图片压缩失败");
+                        }
+                    }).launch();
+
+        }
+
+    }
 }

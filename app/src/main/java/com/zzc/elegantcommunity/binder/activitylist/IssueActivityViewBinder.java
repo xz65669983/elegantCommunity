@@ -1,11 +1,14 @@
 package com.zzc.elegantcommunity.binder.activitylist;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,11 +48,12 @@ import me.drakeet.multitype.ItemViewBinder;
 public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel, IssueActivityViewBinder.ViewHolder> {
 
 
+    private static final int IMAGE = 1;
     private static final String TAG = "IssueActivityViewBinder";
     private String place;
+    private Fragment fragment;
 
-    private View view;
-
+    public static View view;
     @BindView(R.id.et_activity_topic)
     EditText etActivityTopic;
     @BindView(R.id.et_mobile_phone)
@@ -73,6 +77,11 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
     @BindView(R.id.tv_end_activity_time)
     TextView tvEndActivityTime;
 
+
+    public IssueActivityViewBinder(Fragment fragment){
+        this.fragment=fragment;
+    }
+
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
@@ -86,15 +95,17 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull ActivityDetialsModel item) {
 
-
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
+       public  ImageView addImageView;
 
 
         ViewHolder(View itemView) {
             super(itemView);
+//            View viewById = view.findViewById(R.id.ll_imageview_container);
+            this.addImageView = view.findViewById(R.id.iv_add_picture);
 
         }
     }
@@ -189,6 +200,14 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
 
                     }
                 });
+    }
+
+    @OnClick(R.id.iv_add_topic)
+    public void pickPicture(){
+        //调用相册
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        fragment.startActivityForResult(intent, IMAGE);
     }
 
     private boolean isLogin() {

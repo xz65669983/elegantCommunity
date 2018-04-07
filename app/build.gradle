@@ -129,5 +129,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.1.1'
     //获取手机图片
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    //鲁班图片压缩
+    compile 'top.zibin:Luban:1.1.3'
 
 }
