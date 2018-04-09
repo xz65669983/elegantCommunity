@@ -63,16 +63,18 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i(TAG,"老子我回来啦！！！！！");
         super.onActivityResult(requestCode, resultCode, data);
 
 
         //获取图片路径
         if (requestCode == IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             Uri uri = data.getData();
+            Log.i(TAG,uri.getPath());
+            Log.i(TAG,"获取的外部缓存路径:"+InitApp.AppContext.getExternalCacheDir().getAbsolutePath());
             Luban.with(InitApp.AppContext)
-                    .load(uri.getPath())
-                    .ignoreBy(100)
+                    .load(uri.getPath().substring(5))
+                    .ignoreBy(50)
+                    .setTargetDir(InitApp.AppContext.getExternalCacheDir().getAbsolutePath())
                     .setCompressListener(new OnCompressListener() {
                         @Override
                         public void onStart() {
@@ -83,8 +85,7 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
                         public void onSuccess(File file) {
                             IssueActivityFragment.this.file=file;
                             Log.i(TAG,"FILE路径"+file.getAbsolutePath());
-                            Log.i(TAG,"FILE路径path"+file.getPath());
-                            Bitmap bitmap = BitmapFactory.decodeFile(StringUtil.cleanFilePathRaw(file.getAbsolutePath()));
+                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                             IssueActivityViewBinder.ViewHolder childViewHolder = (IssueActivityViewBinder.ViewHolder)recyclerView.getChildViewHolder(IssueActivityViewBinder.view);
                             childViewHolder.addImageView.setImageBitmap(bitmap);
 

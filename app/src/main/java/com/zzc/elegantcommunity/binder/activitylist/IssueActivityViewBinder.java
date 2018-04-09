@@ -154,14 +154,11 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
         Retrofit retrofit = RxRetrofitWithGson.getRxRetrofitInstance();
         RetrofitImageAPI retrofitImageAPI = retrofit.create(RetrofitImageAPI.class);
 
-        File oldfile = fragment.getfile();
-        File file =new File(StringUtil.cleanFilePathRaw(oldfile.getAbsolutePath()));
-        if(file==null){
-            return;
-        }
+        File file = fragment.getfile();
+
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                MultipartBody.Part.createFormData("file", "zzc"+file.getName(), requestFile);
 
                 retrofitImageAPI.fileUpload(body)
                         .subscribeOn(Schedulers.io())
@@ -176,7 +173,7 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
                         }, new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
-                                Log.e(TAG,throwable.getMessage());
+                                Log.e(TAG,"上传图片发生错误，错误码："+throwable.getMessage());
                             }
                         });
     }
