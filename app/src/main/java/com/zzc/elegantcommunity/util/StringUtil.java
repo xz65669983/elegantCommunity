@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Meiji on 2017/7/6.
+ * Created by zzc on 2017/7/6.
  */
 
 public class StringUtil {
@@ -14,5 +14,10 @@ public class StringUtil {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
         return matcher.replaceAll("").trim();
+    }
+
+    public static String cleanFilePathRaw(String filepath){
+        return filepath.substring(4);
+
     }
 }

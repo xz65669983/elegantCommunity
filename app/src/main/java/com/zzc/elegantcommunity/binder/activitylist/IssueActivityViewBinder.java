@@ -1,9 +1,14 @@
 package com.zzc.elegantcommunity.binder.activitylist;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +29,16 @@ import com.zzc.elegantcommunity.R;
 import com.zzc.elegantcommunity.model.MyResponseBody;
 import com.zzc.elegantcommunity.model.issueactivity.ActivityDetialsModel;
 import com.zzc.elegantcommunity.model.issueactivity.IssueActivityModel;
+import com.zzc.elegantcommunity.module.issueActivity.IssueActivityFragment;
 import com.zzc.elegantcommunity.retrofit.IssueActivityService;
+import com.zzc.elegantcommunity.retrofit.RetrofitImageAPI;
 import com.zzc.elegantcommunity.retrofit.RxRetrofitWithGson;
+import com.zzc.elegantcommunity.util.StringUtil;
 import com.zzc.elegantcommunity.util.UserInfoUtil;
 
 import org.feezu.liuli.timeselector.TimeSelector;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +50,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import me.drakeet.multitype.ItemViewBinder;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
 
 /**
  * Created by zhangzhengchao on 2018/4/4.
@@ -51,8 +66,7 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
     private static final int IMAGE = 1;
     private static final String TAG = "IssueActivityViewBinder";
     private String place;
-    private Fragment fragment;
-
+    private static IssueActivityFragment fragment;
     public static View view;
     @BindView(R.id.et_activity_topic)
     EditText etActivityTopic;
@@ -64,21 +78,17 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
     EditText etActivityFee;
     @BindView(R.id.et_activity_content)
     EditText etAtivityContent;
-
     @BindView(R.id.et_mian_address)
     EditText etMianAddress;
-
     @BindView(R.id.end_time)
     TextView tvEndTime;
-
     @BindView(R.id.tv_select_location)
     TextView tvSelectLoacation;
-
     @BindView(R.id.tv_end_activity_time)
     TextView tvEndActivityTime;
 
 
-    public IssueActivityViewBinder(Fragment fragment){
+    public IssueActivityViewBinder(IssueActivityFragment fragment){
         this.fragment=fragment;
     }
 
@@ -104,7 +114,6 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
 
         ViewHolder(View itemView) {
             super(itemView);
-//            View viewById = view.findViewById(R.id.ll_imageview_container);
             this.addImageView = view.findViewById(R.id.iv_add_picture);
 
         }
@@ -142,6 +151,37 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
 
     @OnClick(R.id.btn_issue)
     public void issueActivtiy() {
+        Retrofit retrofit = RxRetrofitWithGson.getRxRetrofitInstance();
+        RetrofitImageAPI retrofitImageAPI = retrofit.create(RetrofitImageAPI.class);
+
+        File oldfile = fragment.getfile();
+        File file =new File(StringUtil.cleanFilePathRaw(oldfile.getAbsolutePath()));
+        if(file==null){
+            return;
+        }
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+                retrofitImageAPI.fileUpload(body)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<ResponseBody>() {
+                            @Override
+                            public void accept(ResponseBody responseBody) throws Exception {
+
+                                Log.i(TAG, responseBody.string());
+                                Log.i(TAG, "" + responseBody.contentLength());
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                Log.e(TAG,throwable.getMessage());
+                            }
+                        });
+    }
+
+    private void  issueActivtiyFirstStep(){
         boolean login = isLogin();
         if(!login){
             Toast.makeText(InitApp.AppContext,"请先登录",Toast.LENGTH_LONG).show();
@@ -204,10 +244,18 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
 
     @OnClick(R.id.iv_add_topic)
     public void pickPicture(){
-        //调用相册
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        fragment.startActivityForResult(intent, IMAGE);
+
+        //权限申请
+        if(ContextCompat.checkSelfPermission(fragment.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(fragment.getActivity(),new String []{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+
+        }else {
+            //调用相册
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            fragment.startActivityForResult(intent, IMAGE);
+        }
+
     }
 
     private boolean isLogin() {
@@ -284,4 +332,11 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
     }
 
 
+    public static Fragment getinstatnce(){
+        if(fragment==null){
+            return null;
+        }else{
+            return fragment;
+        }
+    }
 }

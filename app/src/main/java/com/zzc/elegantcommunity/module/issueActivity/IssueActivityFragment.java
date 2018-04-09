@@ -8,16 +8,15 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-
 import com.zzc.elegantcommunity.InitApp;
 import com.zzc.elegantcommunity.binder.activitylist.IssueActivityViewBinder;
 import com.zzc.elegantcommunity.model.issueactivity.ActivityDetialsModel;
 import com.zzc.elegantcommunity.module.activity.IActivityList;
 import com.zzc.elegantcommunity.module.base.BaseListFragment;
+import com.zzc.elegantcommunity.util.StringUtil;
 
 import java.io.File;
 import java.util.List;
-
 import me.drakeet.multitype.MultiTypeAdapter;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -29,6 +28,7 @@ import top.zibin.luban.OnCompressListener;
 public class IssueActivityFragment extends BaseListFragment<IActivityList.Presenter> {
     public static final String TAG = "IssueActivityFragment";
     private static final int IMAGE = 1;
+    private File file;
 
     @Override
     public void setPresenter(IActivityList.Presenter presenter) {
@@ -70,8 +70,6 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
         //获取图片路径
         if (requestCode == IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             Uri uri = data.getData();
-            Log.i(TAG,"uri路径"+uri.getPath());
-            Log.i(TAG, "外部绝对路径："+Environment.getExternalStorageDirectory().getPath());
             Luban.with(InitApp.AppContext)
                     .load(uri.getPath())
                     .ignoreBy(100)
@@ -83,10 +81,13 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
 
                         @Override
                         public void onSuccess(File file) {
+                            IssueActivityFragment.this.file=file;
                             Log.i(TAG,"FILE路径"+file.getAbsolutePath());
-                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                            Log.i(TAG,"FILE路径path"+file.getPath());
+                            Bitmap bitmap = BitmapFactory.decodeFile(StringUtil.cleanFilePathRaw(file.getAbsolutePath()));
                             IssueActivityViewBinder.ViewHolder childViewHolder = (IssueActivityViewBinder.ViewHolder)recyclerView.getChildViewHolder(IssueActivityViewBinder.view);
                             childViewHolder.addImageView.setImageBitmap(bitmap);
+
                         }
 
                         @Override
@@ -98,4 +99,10 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
         }
 
     }
+
+    public File getfile(){
+        return file;
+    }
+
+
 }

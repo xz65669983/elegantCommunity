@@ -1,17 +1,20 @@
 package com.zzc.elegantcommunity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +22,9 @@ import android.widget.Toast;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.zzc.elegantcommunity.binder.activitylist.IssueActivityViewBinder;
 import com.zzc.elegantcommunity.module.base.BaseActivity;
+import com.zzc.elegantcommunity.module.issueActivity.IssueActivityFragment;
 import com.zzc.elegantcommunity.module.media.channel.PersonalCenterFragment;
 import com.zzc.elegantcommunity.module.news.NewsTabLayout;
 import com.zzc.elegantcommunity.module.photo.PhotoTabLayout;
@@ -28,6 +33,10 @@ import com.zzc.elegantcommunity.module.video.VideoTabLayout;
 import com.zzc.elegantcommunity.setting.SettingActivity;
 import com.zzc.elegantcommunity.util.SettingUtil;
 import com.zzc.elegantcommunity.widget.helper.BottomNavigationViewHelper;
+
+import java.util.List;
+
+import static com.facebook.stetho.inspector.protocol.module.Page.ResourceType.IMAGE;
 
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -129,6 +138,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         // recreate 时记录当前位置 (在 Manifest 已禁止 Activity 旋转,所以旋转屏幕并不会执行以下代码)
         outState.putInt(POSITION, position);
         outState.putInt(SELECT_ITEM, bottom_navigation.getSelectedItemId());
@@ -322,5 +332,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 return false;
         }
         return false;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.i(TAG,"是的我进来了！！！！");
+        switch (requestCode){
+            case 1:
+                if(grantResults.length>0&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    Intent intent = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                    IssueActivityViewBinder.getinstatnce().startActivityForResult(intent, 1);
+                }else{
+                    Toast.makeText(InitApp.AppContext,"用户拒绝了权限",Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

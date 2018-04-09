@@ -14,6 +14,32 @@ public class ActivityDetialsModel {
     private Integer cost;
     private String contactPhoneNo;
 
+    private String county;
+    private String  siteId;
+    private String capacityLimit;
+    private String participatorCondition;
+
+
+    private String poster;
+    private String sponsor;
+
+
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getSponsor() {
+        return sponsor;
+    }
+
+    public void setSponsor(String sponsor) {
+        this.sponsor = sponsor;
+    }
 
     public String getTitle() {
         return title;
