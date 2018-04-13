@@ -1,6 +1,7 @@
 package com.zzc.elegantcommunity.binder.activitylist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzc.elegantcommunity.R;
+import com.zzc.elegantcommunity.activity.activityDetails.ActivityDetailsActivity;
 import com.zzc.elegantcommunity.model.issueactivity.BriefActivityModel;
 import com.zzc.elegantcommunity.util.ImageLoader;
 import com.zzc.elegantcommunity.widget.CircleImageView;
@@ -23,6 +25,11 @@ import me.drakeet.multitype.ItemViewBinder;
 public class ActivitListViewBinder extends ItemViewBinder<BriefActivityModel, ActivitListViewBinder.ViewHolder> {
 
     private static final String TAG = "ActivitListViewBinder";
+//    private Context context;
+//
+//    public ActivitListViewBinder(Context context){
+//        this.context=context;
+//    }
 
     @NonNull
     @Override
@@ -38,6 +45,14 @@ public class ActivitListViewBinder extends ItemViewBinder<BriefActivityModel, Ac
         holder.tv_title.setText(item.getTitle());
         holder.tv_extra.setText(item.getContent()+"id:"+item.getId());
         ImageLoader.loadCenterCrop(context, item.getPoster(), holder.iv_video_image, R.color.viewBackground);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ActivityDetailsActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

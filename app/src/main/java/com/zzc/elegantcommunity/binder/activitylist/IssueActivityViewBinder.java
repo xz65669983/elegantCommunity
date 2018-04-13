@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -33,13 +32,9 @@ import com.zzc.elegantcommunity.module.issueActivity.IssueActivityFragment;
 import com.zzc.elegantcommunity.retrofit.IssueActivityService;
 import com.zzc.elegantcommunity.retrofit.RetrofitImageAPI;
 import com.zzc.elegantcommunity.retrofit.RxRetrofitWithGson;
-import com.zzc.elegantcommunity.util.StringUtil;
 import com.zzc.elegantcommunity.util.UserInfoUtil;
-
 import org.feezu.liuli.timeselector.TimeSelector;
-
 import java.io.File;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

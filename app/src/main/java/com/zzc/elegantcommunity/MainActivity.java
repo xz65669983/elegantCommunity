@@ -34,10 +34,6 @@ import com.zzc.elegantcommunity.setting.SettingActivity;
 import com.zzc.elegantcommunity.util.SettingUtil;
 import com.zzc.elegantcommunity.widget.helper.BottomNavigationViewHelper;
 
-import java.util.List;
-
-import static com.facebook.stetho.inspector.protocol.module.Page.ResourceType.IMAGE;
-
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
