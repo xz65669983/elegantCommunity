@@ -176,6 +176,7 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(getContext(),"网络异常，请稍后再试", Toast.LENGTH_LONG).show();
                         Log.e(TAG, throwable.getMessage());
                     }
                 });

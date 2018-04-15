@@ -1,10 +1,12 @@
 package com.zzc.elegantcommunity.model.issueactivity;
 
+import java.io.Serializable;
+
 /**
  * Created by zhangzhengchao on 2018/3/29.
  */
 
-public class BriefActivityModel {
+public class BriefActivityModel implements Serializable {
     private Long id;
     private String title;
     private String beginTime;

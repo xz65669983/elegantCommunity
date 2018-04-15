@@ -50,6 +50,7 @@ public class ActivitListViewBinder extends ItemViewBinder<BriefActivityModel, Ac
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, ActivityDetailsActivity.class);
+                intent.putExtra("BriefActivityModel",item);
                 context.startActivity(intent);
             }
         });

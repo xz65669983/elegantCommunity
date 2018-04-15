@@ -5,18 +5,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+
 import com.zzc.elegantcommunity.InitApp;
 import com.zzc.elegantcommunity.binder.activitylist.IssueActivityViewBinder;
 import com.zzc.elegantcommunity.model.issueactivity.ActivityDetialsModel;
 import com.zzc.elegantcommunity.module.activity.IActivityList;
 import com.zzc.elegantcommunity.module.base.BaseListFragment;
-import com.zzc.elegantcommunity.util.StringUtil;
 
 import java.io.File;
 import java.util.List;
+
 import me.drakeet.multitype.MultiTypeAdapter;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
