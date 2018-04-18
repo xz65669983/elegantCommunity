@@ -89,7 +89,9 @@ public class SignupActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
+                    Log.d(TAG,response.toString());
                    String respond= response.body().string();
+
                     Log.i(TAG, "注册返回数据:"+respond);
                     JsonElement je = new JsonParser().parse(respond);
                     String resultCode = je.getAsJsonObject().get("resultCode").toString();

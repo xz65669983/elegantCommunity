@@ -1,6 +1,7 @@
 package com.zzc.elegantcommunity.adapter.aliAdapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +22,9 @@ import com.zzc.elegantcommunity.R;
 public class OneImageViewAdapter extends MyDelegateAdapter<OneImageViewAdapter.MainViewHolder>{
 
 
+
+    public Bitmap bitmap;
+
     public OneImageViewAdapter(Context context, LayoutHelper layoutHelper, int count) {
         super(context, layoutHelper, count);
     }
@@ -28,7 +32,13 @@ public class OneImageViewAdapter extends MyDelegateAdapter<OneImageViewAdapter.M
     public OneImageViewAdapter(Context context, LayoutHelper layoutHelper, int count, @NonNull VirtualLayoutManager.LayoutParams layoutParams) {
         super(context, layoutHelper, count, layoutParams);
     }
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
 
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
 
     @Override
     public OneImageViewAdapter.MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,13 +59,10 @@ public class OneImageViewAdapter extends MyDelegateAdapter<OneImageViewAdapter.M
     @Override
     protected void onBindViewHolderWithOffset(OneImageViewAdapter.MainViewHolder holder, int position, int offsetTotal) {
 
-        holder.oneImageView.setImageResource(R.mipmap.app_splash);
+        holder.oneImageView.setImageBitmap(bitmap);
     }
 
-   /* @Override
-    public int getItemCount() {
-        return mCount;
-    }*/
+
 
 
     static class MainViewHolder extends RecyclerView.ViewHolder {

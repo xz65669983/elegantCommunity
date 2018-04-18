@@ -58,7 +58,7 @@ public class EachItemViewAdapter  extends MyDelegateAdapter<EachItemViewAdapter.
         }
 
     }
-
+;
     @Override
     public int getItemCount() {
         return eachItemBeans.size();

@@ -158,6 +158,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void setheadImage(String filename) {
+        Log.e(TAG,"图片默认地址为："+filename);
         Retrofit rxRetrofit = RxRetrofit.getRxRetrofitInstance();
         RetrofitImageAPI imageAPI = rxRetrofit.create(RetrofitImageAPI.class);
         imageAPI.getImageDetails(filename)

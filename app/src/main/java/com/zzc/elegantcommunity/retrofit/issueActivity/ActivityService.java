@@ -2,6 +2,8 @@ package com.zzc.elegantcommunity.retrofit.issueActivity;
 
 import com.zzc.elegantcommunity.model.issueactivity.BriefAcitivtyResponseModel;
 import com.zzc.elegantcommunity.model.issueactivity.BriefActivityRequestModel;
+import com.zzc.elegantcommunity.model.issueactivity.ParticipateActivityResponseModel;
+
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
@@ -17,4 +19,10 @@ public interface ActivityService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})
 //需要添加头
     Observable<BriefAcitivtyResponseModel> getNewestActivities(@Body BriefActivityRequestModel briefActivityRequestModel);
+
+
+    @POST("elegant/activity/participate")
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    Observable<ParticipateActivityResponseModel> participate(@Body BriefActivityRequestModel briefActivityRequestModel);
+
 }

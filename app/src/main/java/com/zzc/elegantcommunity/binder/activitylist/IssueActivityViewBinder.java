@@ -146,6 +146,7 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
 
     @OnClick(R.id.btn_issue)
     public void issueActivtiy() {
+        issueActivtiyFirstStep();
         Retrofit retrofit = RxRetrofitWithGson.getRxRetrofitInstance();
         RetrofitImageAPI retrofitImageAPI = retrofit.create(RetrofitImageAPI.class);
 
