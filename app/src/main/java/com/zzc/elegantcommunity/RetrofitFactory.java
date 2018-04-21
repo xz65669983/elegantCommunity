@@ -90,7 +90,7 @@ public class RetrofitFactory {
 
                 // Log 拦截器
                 if (BuildConfig.DEBUG) {
-                    SdkManager.initInterceptor(builder);
+//                    SdkManager.initInterceptor(builder);
                 }
 
                 retrofit = new Retrofit.Builder()

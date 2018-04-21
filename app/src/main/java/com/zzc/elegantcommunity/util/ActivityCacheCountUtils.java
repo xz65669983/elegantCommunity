@@ -26,24 +26,24 @@ public class ActivityCacheCountUtils {
 
     }
 
-    public void saveOldestId(Long oldestId){
+    public void saveOldestId(Integer oldestId){
         SharedPreferences.Editor edit = tokentils.edit();
-        edit.putLong("oldestId",oldestId);
+        edit.putInt("oldestId",oldestId);
         edit.commit();
 
     }
-    public Long getOldestId(){
-        return tokentils.getLong("oldestId", 0);
+    public Integer getOldestId(){
+        return tokentils.getInt("oldestId", 0);
     }
 
-    public void saveLatestId(Long latestId){
+    public void saveLatestId(Integer latestId){
         SharedPreferences.Editor edit = tokentils.edit();
-        edit.putLong("latestId",latestId);
+        edit.putInt("latestId",latestId);
         edit.commit();
 
     }
-    public Long getLatestId(){
-        return tokentils.getLong("latestId", 0);
+    public Integer getLatestId(){
+        return tokentils.getInt("latestId", 0);
     }
 
 

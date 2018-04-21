@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -19,35 +20,96 @@ import com.zzc.elegantcommunity.adapter.aliAdapter.EachItemViewAdapter;
 import com.zzc.elegantcommunity.adapter.aliAdapter.OneImageViewAdapter;
 import com.zzc.elegantcommunity.adapter.aliAdapter.TitleViewAdapter;
 import com.zzc.elegantcommunity.model.issueactivity.BriefActivityModel;
+import com.zzc.elegantcommunity.model.issueactivity.ParticipateActivityRequestModel;
+import com.zzc.elegantcommunity.model.issueactivity.ParticipateActivityResponseModel;
 import com.zzc.elegantcommunity.retrofit.RetrofitImageAPI;
 import com.zzc.elegantcommunity.retrofit.RxRetrofit;
+import com.zzc.elegantcommunity.retrofit.RxRetrofitWithGson;
+import com.zzc.elegantcommunity.retrofit.issueActivity.ActivityService;
+import com.zzc.elegantcommunity.util.UserInfoUtil;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
 
 /**
  * Created by Administrator on 2018/2/17.
  */
 
 public class ActivityDetailsActivity extends AppCompatActivity {
+    private static final String TAG = "ActivityDetailsActivity";
     private RecyclerView rvActivityDetials;
+
+    private Integer activityId;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detials);
+        ButterKnife.bind(this);
 
         initView();
         initdate();
+    }
+
+    @OnClick(R.id.btn_back)
+    public void back(){
+        finish();
+    }
+
+
+
+    @OnClick(R.id.bt_participate)
+    public void participate(){
+        //判断是否已经登录
+
+        boolean login = UserInfoUtil.isLogin();
+        if(!login){
+            Toast.makeText(ActivityDetailsActivity.this,"请先登录",Toast.LENGTH_LONG).show();
+            return ;
+        }
+        Retrofit rxRetrofitInstance = RxRetrofitWithGson.getRxRetrofitInstance();
+        ActivityService activityService = rxRetrofitInstance.create(ActivityService.class);
+
+        ParticipateActivityRequestModel p=new ParticipateActivityRequestModel();
+        UserInfoUtil instance = UserInfoUtil.getInstance();
+        p.setToken(instance.getToken());
+        p.setUserAcc(instance.getUserAcc());
+        ParticipateActivityRequestModel.Participator participator= new ParticipateActivityRequestModel.Participator();
+        participator.setActivityId(activityId);
+        participator.setUserId(instance.getId());
+        p.setParticipator(participator);
+        activityService.participate(p)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ParticipateActivityResponseModel>() {
+                    @Override
+                    public void accept(ParticipateActivityResponseModel participateActivityResponseModel) throws Exception {
+                        String resultCode = participateActivityResponseModel.getResultCode();
+                        if (resultCode.equals("0000")){
+                            Toast.makeText(ActivityDetailsActivity.this,"报名成功",Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(ActivityDetailsActivity.this,"报名失败"+participateActivityResponseModel.getResultMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Toast.makeText(ActivityDetailsActivity.this,"网络异常",Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
     private void initdate() {
@@ -60,7 +122,7 @@ public class ActivityDetailsActivity extends AppCompatActivity {
         String city = briefActivityModel.getCity();
         String mainAddress = briefActivityModel.getMainAddress();
         String content = briefActivityModel.getContent();
-//        Long id = briefActivityModel.getId();
+        activityId = briefActivityModel.getId();
         Integer cost = briefActivityModel.getCost();
         String county = briefActivityModel.getCounty();
         String participatorCondition = briefActivityModel.getParticipatorCondition();
@@ -83,7 +145,7 @@ public class ActivityDetailsActivity extends AppCompatActivity {
         ArrayList<TitleViewAdapter.TitleViewHolderBean> titleViewHolderBeans = new ArrayList<>();
         TitleViewAdapter.TitleViewHolderBean t = new TitleViewAdapter.TitleViewHolderBean();
         t.setContent(content);
-        t.setTvSignupCount("已报名人数0人");
+        t.setTvSignupCount("已报名人数"+briefActivityModel.getParticipatedCount()+"人");
         t.setTvTitle("主题：" + title);
         titleViewHolderBeans.add(t);
         titleViewAdapter.setTitleViewHolderBeans(titleViewHolderBeans);
@@ -137,8 +199,9 @@ public class ActivityDetailsActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Bitmap>() {
                     @Override
                     public void accept(Bitmap bitmap) throws Exception {
-
+                        Log.i(TAG,"获取图片成功 你应该给我显示出来啦");
                         OneImageViewAdapter oneImageViewAdapter = new OneImageViewAdapter(ActivityDetailsActivity.this, new LinearLayoutHelper(10), 1);
+                        oneImageViewAdapter.setBitmap(bitmap);
                         adapters.add(oneImageViewAdapter);
                         delegateAdapter.setAdapters(adapters);
                         delegateAdapter.notifyDataSetChanged();

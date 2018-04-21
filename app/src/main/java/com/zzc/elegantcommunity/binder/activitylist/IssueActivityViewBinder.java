@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.lljjcoder.Interface.OnCityItemClickListener;
 import com.lljjcoder.bean.CityBean;
 import com.lljjcoder.bean.DistrictBean;
@@ -33,8 +34,12 @@ import com.zzc.elegantcommunity.retrofit.IssueActivityService;
 import com.zzc.elegantcommunity.retrofit.RetrofitImageAPI;
 import com.zzc.elegantcommunity.retrofit.RxRetrofitWithGson;
 import com.zzc.elegantcommunity.util.UserInfoUtil;
+
 import org.feezu.liuli.timeselector.TimeSelector;
+
 import java.io.File;
+import java.util.UUID;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -62,6 +67,8 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
     private static final String TAG = "IssueActivityViewBinder";
     private String place;
     private static IssueActivityFragment fragment;
+
+    private String ImagePath;
     public static View view;
     @BindView(R.id.et_activity_topic)
     EditText etActivityTopic;
@@ -146,15 +153,15 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
 
     @OnClick(R.id.btn_issue)
     public void issueActivtiy() {
-        issueActivtiyFirstStep();
         Retrofit retrofit = RxRetrofitWithGson.getRxRetrofitInstance();
         RetrofitImageAPI retrofitImageAPI = retrofit.create(RetrofitImageAPI.class);
 
         File file = fragment.getfile();
+       ImagePath= UUID.randomUUID()+file.getName();
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("file", "zzc"+file.getName(), requestFile);
+                MultipartBody.Part.createFormData("file", ImagePath, requestFile);
 
                 retrofitImageAPI.fileUpload(body)
                         .subscribeOn(Schedulers.io())
@@ -172,6 +179,7 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
                                 Log.e(TAG,"上传图片发生错误，错误码："+throwable.getMessage());
                             }
                         });
+        issueActivtiyFirstStep();
     }
 
     private void  issueActivtiyFirstStep(){
@@ -186,13 +194,14 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
         }
         IssueActivityModel issueActivityModel = new IssueActivityModel();
         ActivityDetialsModel acm = new ActivityDetialsModel();
-        acm.setBeginTime(tvStartTime.getText().toString());
-        acm.setEndTime(tvEndTime.getText().toString());
+        acm.setBeginTime(tvStartTime.getText().toString()+":00");
+        acm.setEndTime(tvEndTime.getText().toString()+":00");
         acm.setCity(this.place);
         acm.setContactPhoneNo(etMobilePhone.getText().toString());
         acm.setTitle(etActivityTopic.getText().toString());
         acm.setMainAddress(etMianAddress.getText().toString());
-
+        acm.setPoster(ImagePath);
+        acm.setSponsor(UserInfoUtil.getInstance().getId());
         String fee = etActivityFee.getText().toString();
         if(fee==null||fee.contentEquals("")){
             acm.setCost(0);
@@ -212,11 +221,11 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
                 .subscribe(new Consumer<MyResponseBody>() {
                     @Override
                     public void accept(MyResponseBody responseBody) throws Exception {
-//                        JsonElement je = new JsonParser().parse(responseBody.toString());
-//                        String resultCode = je.getAsJsonObject().get("resultCode").toString();
+
                         String resultCode = responseBody.getResultCode();
                         if(resultCode.contentEquals("0000")){
                             //发布活动成功
+                            fragment.getViewPager().setCurrentItem(0);
                             Toast.makeText(InitApp.AppContext, "发布活动成功", Toast.LENGTH_LONG).show();
 
                         }else {

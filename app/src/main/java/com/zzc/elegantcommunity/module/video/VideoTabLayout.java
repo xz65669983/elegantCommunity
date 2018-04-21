@@ -73,11 +73,13 @@ public class VideoTabLayout extends Fragment {
         Fragment fragment= ActivityListFragment.newInstance();
         fragmentList.add(fragment);
 //        Fragment issueAvtivityFragment = new IssueAvtivityFragment();
-        Fragment issueAvtivityFragment =new IssueActivityFragment();
+        IssueActivityFragment issueAvtivityFragment =new IssueActivityFragment();
+        issueAvtivityFragment.setViewPager(viewPager);
         fragmentList.add(issueAvtivityFragment);
 
         adapter = new BasePagerAdapter(getChildFragmentManager(), fragmentList, categoryName);
         viewPager.setAdapter(adapter);
+
     }
 
     public void onDoubleClick() {

@@ -2,6 +2,7 @@ package com.zzc.elegantcommunity.retrofit.issueActivity;
 
 import com.zzc.elegantcommunity.model.issueactivity.BriefAcitivtyResponseModel;
 import com.zzc.elegantcommunity.model.issueactivity.BriefActivityRequestModel;
+import com.zzc.elegantcommunity.model.issueactivity.ParticipateActivityRequestModel;
 import com.zzc.elegantcommunity.model.issueactivity.ParticipateActivityResponseModel;
 
 import io.reactivex.Observable;
@@ -23,6 +24,6 @@ public interface ActivityService {
 
     @POST("elegant/activity/participate")
     @Headers({"Content-Type: application/json", "Accept: application/json"})
-    Observable<ParticipateActivityResponseModel> participate(@Body BriefActivityRequestModel briefActivityRequestModel);
+    Observable<ParticipateActivityResponseModel> participate(@Body ParticipateActivityRequestModel participateActivityRequestModel);
 
 }

@@ -7,9 +7,6 @@ import com.facebook.stetho.Stetho;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-/**
- * Created by Meiji on 2017/5/6.
- */
 
 public class SdkManager {
     public static void initStetho(Context context) {

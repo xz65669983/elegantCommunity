@@ -7,6 +7,16 @@ package com.zzc.elegantcommunity.model;
 public class User {
 
     //后台接口必填字段
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     private String userAcc;
     private String nickName;
     private String pwd;

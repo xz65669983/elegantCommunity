@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public class BriefActivityModel implements Serializable {
-    private Long id;
+    private Integer id;
     private String title;
     private String beginTime;
     private String endTime;
@@ -23,12 +23,21 @@ public class BriefActivityModel implements Serializable {
     private String poster;
     private Integer sponsor;
 
+    private Integer participatedCount;
 
-    public Long getId() {
+    public Integer getParticipatedCount() {
+        return participatedCount;
+    }
+
+    public void setParticipatedCount(Integer participatedCount) {
+        this.participatedCount = participatedCount;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

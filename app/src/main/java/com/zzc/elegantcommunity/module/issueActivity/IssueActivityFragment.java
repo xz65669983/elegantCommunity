@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 
@@ -29,6 +30,17 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
     public static final String TAG = "IssueActivityFragment";
     private static final int IMAGE = 1;
     private File file;
+
+    private ViewPager viewPager;
+
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+    public void setViewPager(ViewPager viewPager) {
+        this.viewPager = viewPager;
+    }
+
 
     @Override
     public void setPresenter(IActivityList.Presenter presenter) {
@@ -56,8 +68,6 @@ public class IssueActivityFragment extends BaseListFragment<IActivityList.Presen
         adapter = new MultiTypeAdapter(oldItems);
         adapter.register(ActivityDetialsModel.class, new IssueActivityViewBinder(IssueActivityFragment.this));
         recyclerView.setAdapter(adapter);
-
-
 
     }
 

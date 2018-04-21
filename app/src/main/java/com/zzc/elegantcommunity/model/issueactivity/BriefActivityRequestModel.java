@@ -6,16 +6,16 @@ package com.zzc.elegantcommunity.model.issueactivity;
 
 public class BriefActivityRequestModel {
 
-    private Long startNum;
+    private Integer startNum;
     private Integer pageSize;
 
 
 
-    public Long getStartNum() {
+    public Integer getStartNum() {
         return startNum;
     }
 
-    public void setStartNum(Long startNum) {
+    public void setStartNum(Integer startNum) {
         this.startNum = startNum;
     }
 

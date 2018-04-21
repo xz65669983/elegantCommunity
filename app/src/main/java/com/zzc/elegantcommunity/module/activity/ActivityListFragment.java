@@ -56,7 +56,7 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
                 if (canLoadMore) {
                     canLoadMore = false;
                     ActivityCacheCountUtils instance = ActivityCacheCountUtils.getInstance();
-                    Long oldestId = instance.getOldestId();
+                    int oldestId = instance.getOldestId();
                     getData(oldestId - 1, 5)
                             .doOnNext(new Consumer<BriefAcitivtyResponseModel>() {
                                 @Override
@@ -150,15 +150,15 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
     protected void initData() throws NullPointerException {
 
         Log.i(TAG, "进入函数initData");
-        getData(Long.valueOf(-1), 5)
+        getData(-1, 5)
                 .doOnNext(new Consumer<BriefAcitivtyResponseModel>() {
             @Override
             public void accept(BriefAcitivtyResponseModel briefAcitivtyResponseModel) throws Exception {
                 List<BriefActivityModel> briefActivityModelList = briefAcitivtyResponseModel.getBriefActivityModelList();
                 if (briefActivityModelList != null && briefActivityModelList.size() != 0) {
-                    Long latestid = briefActivityModelList.get(0).getId();
+                    int latestid = briefActivityModelList.get(0).getId();
                     Log.d(TAG, "latestid:+" + latestid);
-                    Long oldestid = briefActivityModelList.get(briefActivityModelList.size() - 1).getId();
+                    int oldestid = briefActivityModelList.get(briefActivityModelList.size() - 1).getId();
                     Log.d(TAG, "oldestid:+" + oldestid);
                     ActivityCacheCountUtils instance = ActivityCacheCountUtils.getInstance();
                     instance.saveLatestId(latestid);
@@ -184,7 +184,7 @@ public class ActivityListFragment extends BaseListFragment<IActivityList.Present
 
     }
 
-    private Observable<BriefAcitivtyResponseModel> getData(Long startNum, int size) {
+    private Observable<BriefAcitivtyResponseModel> getData(int startNum, int size) {
         ActivityService activityService = RxRetrofitWithGson.getRxRetrofitInstance().create(ActivityService.class);
 
 

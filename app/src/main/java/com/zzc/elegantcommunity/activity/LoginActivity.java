@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     instance.saveToken(body.getToken());
                     //保存
                     User user = body.getUser();
+                    instance.saveId(user.getId());
                     instance.saveUserName(user.getUserName());
                     instance.saveEmail(user.getEmail());
                     instance.saveMale(user.getMale());

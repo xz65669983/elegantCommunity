@@ -57,6 +57,19 @@ public class UserInfoUtil {
        return tokentils.getInt("verifyType", 0);
     }
 
+
+    public void saveId(Integer id){
+        SharedPreferences.Editor edit = tokentils.edit();
+        edit.putInt("id",id);
+        edit.commit();
+
+    }
+    public Integer getId(){
+        return tokentils.getInt("id", 0);
+    }
+
+
+
     public void savepPortraitFilename(String portraitFilename){
         SharedPreferences.Editor edit = tokentils.edit();
         edit.putString("portraitFilename",portraitFilename);
@@ -132,6 +145,18 @@ public class UserInfoUtil {
     }
     public Integer geUserGrade(){
         return tokentils.getInt("userGrade", 0);
+    }
+
+
+    public static boolean  isLogin() {
+        String token = UserInfoUtil.getInstance().getToken();
+        if(token.contentEquals("")||token==null){
+            return false;
+        }else{
+            return true;
+        }
+
+
     }
 
 }

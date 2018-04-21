@@ -21,7 +21,7 @@ public class ActivityDetialsModel {
 
 
     private String poster;
-    private String sponsor;
+    private Integer sponsor;
 
 
 
@@ -33,11 +33,11 @@ public class ActivityDetialsModel {
         this.poster = poster;
     }
 
-    public String getSponsor() {
+    public Integer getSponsor() {
         return sponsor;
     }
 
-    public void setSponsor(String sponsor) {
+    public void setSponsor(Integer sponsor) {
         this.sponsor = sponsor;
     }
 
