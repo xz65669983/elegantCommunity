@@ -157,6 +157,10 @@ public class IssueActivityViewBinder extends ItemViewBinder<ActivityDetialsModel
         RetrofitImageAPI retrofitImageAPI = retrofit.create(RetrofitImageAPI.class);
 
         File file = fragment.getfile();
+        if(file==null){
+            Toast.makeText(InitApp.AppContext,"请选择图片",Toast.LENGTH_LONG).show();
+            return;
+        }
        ImagePath= UUID.randomUUID()+file.getName();
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);

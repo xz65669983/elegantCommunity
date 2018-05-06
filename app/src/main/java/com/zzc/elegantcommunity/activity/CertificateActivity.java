@@ -45,6 +45,7 @@ import static android.R.attr.type;
 
 
 public class CertificateActivity extends AppCompatActivity {
+    private static final String TAG = "CertificateActivity";
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -199,6 +200,7 @@ public class CertificateActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG,"requestCode为："+requestCode);
         switch (requestCode) {
             case TAKE_PHOTO_FRONT:
                 if (resultCode == RESULT_OK) {

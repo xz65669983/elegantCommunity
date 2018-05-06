@@ -32,7 +32,7 @@ public interface UserService {
     @POST("elegant/user/register")
     @Headers({"Content-Type: application/json", "Accept: application/json"})
 //需要添加头
-    Call<ResponseBody> signUp(@Body RegisterModel registerModel);
+    Observable<ResponseBody> signUp(@Body RegisterModel registerModel);
 
     @POST("elegant/user/logout")
     @Headers({"Content-Type: application/json", "Accept: application/json"})

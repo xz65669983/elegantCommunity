@@ -200,7 +200,7 @@ public class IdentifyIDActivity extends TakePhotoActivity {
                 iv_id_front.setImageBitmap(bitmap1);
             }else {
                 Bitmap bitmap2 = BitmapFactory.decodeFile(imagepath2);
-                iv_id_front.setImageBitmap(bitmap2);
+                iv_id_back.setImageBitmap(bitmap2);
             }
         }
         //当为从相片获取时
